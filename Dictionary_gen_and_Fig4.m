@@ -215,26 +215,25 @@ disp(['5 largest singular values: ', num2str(S(1,1)), ', ', num2str(S(2,2)), ', 
 %% Dictionary analysis for different simulated tissues.
 
 % WM parameters.
-T1x_WM = [650 1000 6.5]*1e-3; 
-T2x_WM = [80e-3, 12.5e-6]; 
-f_WM = 0.65; 
-K_WM = 65; 
-M0b_Varma_WM = (7.3*(1/T1x_WM(1)))/K_WM; 
-M0b_WM = M0b_Varma_WM/(1 + M0b_Varma_WM); 
+T1x_WM = [1090 1000 6.2]*1e-3; 
+T2x_WM = [69e-3, 9e-6]; 
+f_WM = 1; 
+K_WM = 59.6; 
+M0b_WM = 0.101; 
 M0f_WM = 1-M0b_WM; 
 M0_WM = [M0f_WM M0b_WM*(1-f_WM) M0b_WM*f_WM];
 VP_WM = [M0_WM, T1x_WM, T2x_WM, K_WM];
 [GWM_3B,wlocWM_3B] = SuperLorentzian_LSint(T2x_WM(2),df_3B);
 [GWM_2B,wlocWM_2B] = SuperLorentzian_LSint(T2x_WM(2),df_2B);
 [GWM_1B,wlocWM_1B] = SuperLorentzian_LSint(T2x_WM(2),df_1B);
-
+ 
 % GM parameters.
-T1x_GM = [1100 1000 5.5]*1e-3; 
-T2x_GM = [115e-3, 10e-6]; 
-f_GM = 0.20; 
-K_GM = 50; 
+T1x_GM = [1820 1000 5.9]*1e-3; 
+T2x_GM = [99e-3, 7.58e-6]; 
+f_GM = 1; 
+K_GM = 50.8; 
 M0b_Varma_GM = (7.3*(1/T1x_GM(1)))/K_GM; 
-M0b_GM = M0b_Varma_GM/(1 + M0b_Varma_GM); 
+M0b_GM = 0.0348;
 M0f_GM = 1-M0b_GM; 
 M0_GM = [M0f_GM M0b_GM*(1-f_GM) M0b_GM*f_GM];
 VP_GM = [M0_GM, T1x_GM, T2x_GM, K_GM];
@@ -256,7 +255,8 @@ VP_CSF = [M0_CSF, T1x_CSF, T2x_CSF, K_CSF];
 [GCSF_2B,wlocCSF_2B] = SuperLorentzian_LSint(T2x_CSF(2),df_2B);
 [GCSF_1B,wlocCSF_1B] = SuperLorentzian_LSint(T2x_CSF(2),df_1B);
 
-Rank_no = 1:20; dphi = 0;
+Rank_no = 1:20; 
+dphi = 0;
 x_WM = zeros(length(Rank_no),1200);xprime_WM = zeros(length(Rank_no),1200);
 x_GM = zeros(length(Rank_no),1200);xprime_GM = zeros(length(Rank_no),1200);
 x_CSF = zeros(length(Rank_no),1200);xprime_CSF = zeros(length(Rank_no),1200);
@@ -275,7 +275,7 @@ for ii = 1:length(Rank_no)
 
 end
 
-%% Plot results of analysis for Figure 4.
+% Plot results of analysis for Figure 4.
 
 cm = lines(10);
 figure(1); 
@@ -308,8 +308,8 @@ annotation('textbox','String','(a)','FontSize',24,'LineStyle','none','Position',
 
 
 subplot(10,2,2:2:10)
-plot(log10(diag(S)),'-o','LineWidth',3,'MarkerSize',10,'Color','k'); xlim([0 20])
-set(gca,'FontSize',16); grid on; grid minor; xlabel('R','FontSize',20); ylabel('Log of Singular Values');
+plot((diag(S)/S(1,1)),'-o','LineWidth',3,'MarkerSize',10,'Color','k'); xlim([1 10])
+set(gca,'FontSize',16); grid on; grid minor; xlabel('R','FontSize',20); ylabel('Norm. Singular Values');
 annotation('textbox','String','(b)','FontSize',24,'LineStyle','none','Position',[0.5221875,0.905,0.05,0.069999999999999])
 
 % Compute mean and max residuals.
@@ -331,4 +331,4 @@ plot(Meanres_GM,'-o','LineWidth',3,'MarkerSize',10,'Color',cm2(8,:));
 plot(Meanres_CSF,'-o','LineWidth',3,'MarkerSize',10,'Color',cm2(15,:));
 set(gca,'FontSize',16); xlabel('R','FontSize',20); ylabel('Mean Residuals (%)');
 grid on; grid minor; ll = legend('WM','GM','CSF'); ll.FontSize = 20; ll.Orientation = 'horizontal'; legend boxoff; xlim([1 10])
-annotation('textbox','String','(c)','FontSize',24,'LineStyle','none','Position',[0.5221875,0.418,0.05,0.07])
+annotation('textbox','String','(c)','FontSize',24,'LineStyle','none','Position',[0.5221875,0.418,0.05,0.07]); ylim([0 15])
