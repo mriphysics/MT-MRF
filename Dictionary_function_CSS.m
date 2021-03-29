@@ -65,8 +65,10 @@ O  = diag([-1i*dphi/TR 1i*dphi/TR 0 0 0 0]);
 Lambda = E+KK+O; % Matrix exponential of this will form Smat.
 C = [0 0 R1(1)*M0f R1(2)*(1-delta)*M0s R1(3)*delta*M0s 0].';
 
-Dphase = diag([-1 -1 1 1 1 1]); % Phase alternation matrix.
-% Spoiling matrix would be: Dphase = diag([0 0 1 1 1 1]);
+% Phase alternation matrix.
+Dphase = diag([-1 -1 1 1 1 1]); 
+% Spoiling matrix would be: 
+%Dphase = diag([0 0 1 1 1 1]);
 
 %% Perform eigenvector decomposition. Use augmented matrix approach.
 
