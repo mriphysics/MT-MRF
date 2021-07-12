@@ -1,3 +1,5 @@
+% Bastian Bechtold (2016). Violin Plots for Matlab (https://github.com/bastibe/Violinplot-Matlab, DOI: 10.5281/zenodo.4559847).
+
 classdef Violin < handle
     % Violin creates violin plots for some data
     %   A violin plot is an easy to read substitute for a box plot

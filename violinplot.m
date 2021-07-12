@@ -1,3 +1,5 @@
+% Bastian Bechtold (2016). Violin Plots for Matlab (https://github.com/bastibe/Violinplot-Matlab, DOI: 10.5281/zenodo.4559847).
+
 function violins = violinplot(data, cats, varargin)
 %Violinplots plots violin plots of some data and categories
 %   VIOLINPLOT(DATA) plots a violin of a double vector DATA
